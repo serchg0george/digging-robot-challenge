@@ -20,8 +20,25 @@ public class RobotOperations {
      * @see RobotPlan
      */
     public RobotPlan excavateStonesForDays(int days) {
-        // TODO
-        return null;
+        List<RobotAction> robotActions = new ArrayList<>();
+        int numberOfStones = 2;
+        if (days == 1) {
+            robotActions.add(RobotAction.DIG);
+            return new RobotPlan(1, 1, robotActions);
+        } else if (days == 2) {
+            robotActions.add(RobotAction.DIG);
+            robotActions.add(RobotAction.DIG);
+            return new RobotPlan(2, numberOfStones, robotActions);
+        } else {
+            robotActions.add(RobotAction.DIG);
+            robotActions.add(RobotAction.DIG);
+            for (int i = 0; i < days - 2; i++) {
+                robotActions.add(RobotAction.CLONE);
+                numberOfStones *= 2;
+            }
+        }
+
+        return new RobotPlan(days, numberOfStones, robotActions);
     }
 
     /**
