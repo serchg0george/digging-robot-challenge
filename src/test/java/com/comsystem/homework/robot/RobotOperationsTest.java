@@ -33,5 +33,14 @@ public class RobotOperationsTest {
 
         RobotPlan robotPlan5Stones = robotOperations.daysRequiredToCollectStones(5);
         assertEquals(4, robotPlan5Stones.numberOfDays());
+
+        RobotPlan robotPlan15Stones = robotOperations.daysRequiredToCollectStones(15);
+        assertEquals(7, robotPlan15Stones.numberOfDays());
+
+        RobotPlan robotPlan41Stones = robotOperations.daysRequiredToCollectStones(41);
+        assertEquals(8, robotPlan41Stones.numberOfDays());
+
+        RobotPlan robotPlan401Stones = robotOperations.daysRequiredToCollectStones(401);
+        assertEquals(12, robotPlan401Stones.numberOfDays());
     }
 }
