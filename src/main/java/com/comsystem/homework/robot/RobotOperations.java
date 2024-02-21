@@ -56,28 +56,23 @@ public class RobotOperations {
         List<RobotAction> robotActions = new ArrayList<>();
         int neededDays = 0;
 
-        if (numberOfStones == 1) {
-            robotActions.add(RobotAction.DIG);
-            return new RobotPlan(1, 1, robotActions);
-        } else if (numberOfStones % 2 == 0) {
-            neededDays = getNeededDays(numberOfStones, robotActions, neededDays);
-            neededDays += 1;
-        } else {
-            neededDays = getNeededDays(numberOfStones, robotActions, neededDays);
-            robotActions.add(RobotAction.DIG);
-            neededDays += 2;
+        while (numberOfStones > 0) {
+            if (numberOfStones == 1) {
+                robotActions.add(RobotAction.DIG);
+                numberOfStones--;
+                neededDays++;
+            } else if (numberOfStones % 2 == 0) {
+                robotActions.add(RobotAction.CLONE);
+                numberOfStones /= 2;
+                neededDays++;
+            } else {
+                robotActions.add(RobotAction.DIG);
+                numberOfStones--;
+                neededDays++;
+            }
         }
 
         return new RobotPlan(neededDays, numberOfStones, robotActions);
-    }
-
-    private int getNeededDays(int numberOfStones, List<RobotAction> robotActions, int neededDays) {
-        for (int i = 0; i < (numberOfStones / 2); i++) {
-            robotActions.add(RobotAction.DIG);
-            neededDays++;
-        }
-        robotActions.add(RobotAction.CLONE);
-        return neededDays;
     }
 
 }
